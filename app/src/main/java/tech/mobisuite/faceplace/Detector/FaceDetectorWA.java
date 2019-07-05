@@ -11,13 +11,13 @@ import com.google.android.gms.vision.face.Face;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-public class FaceDetector extends Detector<Face> {
-    private static final String TAG = "FaceDetector";
+public class FaceDetectorWA extends Detector<Face> {
+    private static final String TAG = "FaceDetectorWA";
     private Detector<Face> mDelegate;
 
     //Face Detector Created
 
-    public FaceDetector(Detector<Face> delegate) {
+    public FaceDetectorWA(Detector<Face> delegate) {
         mDelegate = delegate;
     }
 
