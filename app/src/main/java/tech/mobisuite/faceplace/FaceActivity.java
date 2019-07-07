@@ -33,6 +33,7 @@ public class FaceActivity extends AppCompatActivity {
 
     private static final String TAG = "PhotoViewerActivity";
     public int RESULT_LOAD_IMAGE = 341;
+    int cnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +41,16 @@ public class FaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_face);
         InputStream stream = getResources().openRawResource(R.raw.face);
         Bitmap bitmap = BitmapFactory.decodeStream(stream);
+
         faceoperation(bitmap);
+        cnt = 1;
 
         Button button = (Button) findViewById(R.id.changeimage);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (isReadStoragePermissionGranted()){
+                /*if (isReadStoragePermissionGranted()){
 
                 Intent i = new Intent(
                         Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -58,8 +61,49 @@ public class FaceActivity extends AppCompatActivity {
 
 
 
+                }*/
+
+                if (cnt==1){
+                    InputStream stream = getResources().openRawResource(R.raw.woman2);
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    faceoperation(bitmap);
+                    cnt=2;
                 }
+                else if(cnt == 2){
+
+                    InputStream stream = getResources().openRawResource(R.raw.face2);
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    faceoperation(bitmap);
+                    cnt=3;
+
+                }
+                else if(cnt == 3){
+
+                    InputStream stream = getResources().openRawResource(R.raw.face3);
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    faceoperation(bitmap);
+                    cnt=4;
+
+                }
+                else if(cnt == 4){
+
+                    InputStream stream = getResources().openRawResource(R.raw.face3);
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    faceoperation(bitmap);
+                    cnt=0;
+
+                }
+
+                else {
+                    InputStream stream = getResources().openRawResource(R.raw.face);
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+
+                    faceoperation(bitmap);
+                    cnt=1;
+                }
+
             }
+
         });
     }
 
@@ -113,7 +157,7 @@ public class FaceActivity extends AppCompatActivity {
         }
 
         FaceFunctionsView overlay = (FaceFunctionsView) findViewById(R.id.faceView);
-        overlay.setContent(bitmap, faces);
+        overlay.setContent(bitmap, faces,0);
 
         // Although detector may be used multiple times for different images, it should be released
         // when it is no longer needed in order to free native resources.
